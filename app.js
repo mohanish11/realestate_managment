@@ -1,11 +1,14 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const { createTables } = require('./config/database');
 const propertyController = require('./controllers/propertyController');
-
 const app = express();
-
+app.use(cors({
+    origin: ['https://realestate-managment.onrender.com'],
+    credentials: true
+ }));
 app.use(bodyParser.json());
 
 app.post('/add_new_property', propertyController.addNewProperty);
