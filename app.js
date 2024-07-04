@@ -1,21 +1,18 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const { createTables } = require('./config/database');
 const propertyController = require('./controllers/propertyController');
+
 const app = express();
-app.use(cors({
-    origin: ['https://realestate-managment.onrender.com'],
-    credentials: true
- }));
+
 app.use(bodyParser.json());
 
 app.post('/add_new_property', propertyController.addNewProperty);
 app.get('/fetch_all_properties', propertyController.fetchAllProperties);
 app.put('/update_property_details', propertyController.updatePropertyDetails);
 app.delete('/delete_property_record', propertyController.deletePropertyRecord);
-
+app.get('/fetch_all_localities', propertyController.fetchAllLocalities);
 const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
